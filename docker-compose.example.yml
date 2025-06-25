@@ -1,0 +1,16 @@
+services:
+  app:
+    image: argon/sample.gmail-api
+    build:
+      context: .
+      target: dev # or prod
+    environment:
+      - GOOGLE_CLOUD_CREDENTIAL_PATH=./credentials.json
+      - GOOGLE_CLOUD_ACCESS_TOKEN_PATH=./access_token.json
+      - GOOGLE_CLOUD_PROJECT_NAME=
+      - GOOGLE_CLOUD_WATCH_TOPIC_NAME=
+    volumes:
+      - ./credentials.json:/app/credentials.json
+      - ./access_token.json:/app/access_token.json
+      # - .:/app
+    # command: ["sleep", "infinity"]
