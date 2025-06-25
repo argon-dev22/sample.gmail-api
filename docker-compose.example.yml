@@ -10,7 +10,7 @@ services:
       - GOOGLE_CLOUD_PROJECT_NAME=
       - GOOGLE_CLOUD_WATCH_TOPIC_NAME=
     volumes:
-      - ./credentials.json:/app/credentials.json
-      - ./access_token.json:/app/access_token.json
-      # - .:/app
+      - ./credentials.json:/workspace/credentials.json
+      - ./access_token.json:/workspace/access_token.json
+      # - .:/workspace
     # command: ["sleep", "infinity"]

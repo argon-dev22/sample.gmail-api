@@ -9,20 +9,20 @@ CMD ["go", "run", "./app/cmd/main.go"]
 
 FROM golang:1.24.2 AS builder
 
-WORKDIR /app
+WORKDIR /workspace
 
-COPY ./app .
-COPY ./go.mod ./go.sum .
+COPY ./app ./app
+COPY ./go.mod ./go.sum ./
 
 RUN go mod tidy
 
-RUN CGO_ENABLED=0 go build -o binary ./cmd/main.go
+RUN go build -o binary ./app/cmd/main.go
 
 
 FROM gcr.io/distroless/base AS prod
 
-WORKDIR /app
+WORKDIR /workspace
 
-COPY --from=builder --chown=nonroot:nonroot /app/binary ./binary
+COPY --from=builder --chown=nonroot:nonroot /workspace/binary ./binary
 
 CMD ["./binary"]
